@@ -15,12 +15,12 @@ import android.database.sqlite.SQLiteDatabase;
 public class CoolWeatherDB {
 
 	/**
-	 * Êý¾Ý¿âÃû
+	 * ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½
 	 */
 	public static final String DB_NAME = "cool_weather";
 
 	/**
-	 * Êý¾Ý¿â°æ±¾ºÅ
+	 * ï¿½ï¿½ï¿½Ý¿ï¿½æ±¾ï¿½ï¿½
 	 */
 	public static final int VERSION = 1;
 
@@ -29,7 +29,7 @@ public class CoolWeatherDB {
 	private SQLiteDatabase db;
 
 	/**
-	 * ½«¹¹Ôì·½·¨Ë½ÓÐ»¯
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ì·½ï¿½ï¿½Ë½ï¿½Ð»ï¿½
 	 */
 	private CoolWeatherDB(Context context) {
 		CoolWeatherOpenHelper dbHelper = new CoolWeatherOpenHelper(context,
@@ -45,7 +45,7 @@ public class CoolWeatherDB {
 	}
 
 	/**
-	 * ½«ProvinceÊµÀý´æ´¢µ½Êý¾Ý¿â
+	 * ï¿½ï¿½ProvinceÊµï¿½ï¿½ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
 	 * 
 	 * @param province
 	 */
@@ -59,7 +59,7 @@ public class CoolWeatherDB {
 	}
 
 	/**
-	 * ´ÓÊý¾Ý¿â¶ÁÈ¡È«¹úËùÓÐÊ¡·ÝµÄÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½È¡È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¡ï¿½Ýµï¿½ï¿½ï¿½Ï¢
 	 */
 	public List<Province> loadProvinces() {
 		List<Province> list = new ArrayList<Province>();
@@ -80,19 +80,20 @@ public class CoolWeatherDB {
 	}
 
 	/**
-	 * ½«CityÊµÀý´æ´¢µ½Êý¾Ý¿â
+	 * ï¿½ï¿½CityÊµï¿½ï¿½ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
 	 */
 	public void saveCity(City city) {
 		if (city != null) {
 			ContentValues values = new ContentValues();
 			values.put("city_name", city.getCityName());
 			values.put("city_code", city.getCityCode());
+			values.put("province_Id", city.getProvinceId());
 			db.insert("City", null, values);
 		}
 	}
 
 	/**
-	 * ´ÓÊý¾Ý¿â¶ÁÈ¡Ä³Ê¡ÏÂËùÓÐ³ÇÊÐµÄÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½È¡Ä³Ê¡ï¿½ï¿½ï¿½ï¿½ï¿½Ð³ï¿½ï¿½Ðµï¿½ï¿½ï¿½Ï¢
 	 */
 	public List<City> loadCities(int provinceId) {
 		List<City> list = new ArrayList<City>();
@@ -114,19 +115,20 @@ public class CoolWeatherDB {
 	}
 
 	/**
-	 * ½«CountyÊµÀý´æ´¢µ½Êý¾Ý¿â
+	 * ï¿½ï¿½CountyÊµï¿½ï¿½ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
 	 */
 	public void saveCounty(County county) {
 		if (county != null) {
 			ContentValues values = new ContentValues();
 			values.put("county_name", county.getCountyName());
 			values.put("county_code", county.getCountyCode());
+			values.put("city_id", county.getCityId());
 			db.insert("County", null, values);
 		}
 	}
 
 	/**
-	 * ´ÓÊý¾Ý¿â¶ÁÈ¡Ä³³ÇÊÐÏÂµÄËùÓÐÏØÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½È¡Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	public List<County> loadCounty(int cityId) {
 		List<County> list = new ArrayList<County>();
